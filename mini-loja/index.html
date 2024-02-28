@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini-loja virtual</title>
+
+    <style>
+        #produtos{
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2%;
+            display: flex;
+        }
+        #carrinho{
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2%;
+        }
+        #produto-single{
+            width: 33.3%;
+            padding: 0 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Vitrine</h2>
+    <div id="produtos">
+      
+    </div>
+    <h2>Carrinho</h2>  
+    <div id="carrinho">
+        
+    </div>
+    <script>
+        window.onload = function(){
+            // Banco de dados de produtos
+            const items = [
+                {
+                    id:0,
+                    nome: "camiseta",
+                    img: 'image.jpg',
+                    quantidade: 0
+                },
+                {
+                    id: 1,
+                    nome: "short",
+                    img: 'image.jpg',
+                    quantidade: 0
+                },
+                {
+                    id: 2,
+                    nome: "sapato",
+                    img: 'image.jpg',
+                    quantidade: 0
+                }
+            ]
+
+            // Criar função que vai montar a vitrine
+            function inicializarLoja() {
+                // Pega o container da vitrine
+                var containerProdutos = document.getElementById("produtos");
+                
+                // Percorrer todos os items do array
+                items.map((val)=>{
+                    // Adiciona elementos dentro do documento
+                    containerProdutos.innerHTML+= `
+                    <div class="produto-single">
+                        <img src="`+val.img+`"/>
+                        <p>`+val.nome+`</p>
+                        <a key=`+val.id+` href="#">Adiciona ao carrinho</a>
+                    </div>
+                    `;
+                })
+            }
+
+            inicializarLoja();
+
+
+            // Função que adiciona elementos ao carrinho
+            function atualizarCarrinho(){
+                // Pega o container da vitrine
+                var containerCarrinho = document.getElementById("carrinho");
+                containerCarrinho.innerHTML = "";
+                // Percorrer todos os items do array
+                items.map((val)=>{
+                    // Verifica se a quantidade é maior que 1 pra por no carrinho
+                    if (val.quantidade > 0) {
+                        // Adiciona elementos dentro do documento
+                    containerCarrinho.innerHTML+= `
+                    <p>`+val.nome+` | quantidade: `+val.quantidade+`</p>
+                    <hr>
+                    `;
+                    }
+                })
+            }
+
+            // Pega os links criados e põe numa variavel
+            var links = document.getElementsByTagName("a");
+
+            // Cria uma função que percorre o array
+            for (let i = 0; i < links.length; i++) {
+                // Adiciona um escutador de evento nos links
+                links[i].addEventListener("click", function(){
+                    // Pega a chave do elemento clicado
+                    let key = this.getAttribute("key");
+                    // Usa essa chave para aumentar a quantidade no carrinho
+                    items[key].quantidade++;
+                    atualizarCarrinho();
+                    return false;
+                })
+                
+            }
+        }
+    </script>
+</body>
+</html>
