@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronômetro - JavaScript</title>
+
+    <style>
+        audio{
+            display: none;
+        }
+        .container{
+            text-align: center;
+        }
+        button{
+            cursor: pointer;
+            background-color: #069;
+            border: 0;
+            color: white;
+            padding: 8px 20px;
+        }
+    </style>
+</head>
+<body>
+    <audio id="sound" src="alarm.mp3"></audio>
+
+    <div class="container">
+        <h2>Minutos</h2>
+        <select name="minutos" id="minutos"></select>
+
+        <h2>Segundos</h2>
+        <select name="segundos" id="segundos"></select>
+
+        <br><br>
+        <button id="comecar">Start</button>
+
+        <div id="display">
+            <h3></h3>
+        </div>
+    </div>
+    <script>
+        window.onload = function() {
+            // Pegando um elemento pelo ID
+            var display = document.getElementById("display");
+            var minutos = document.getElementById("minutos");
+            var segungos = document.getElementById("segundos");
+            var comecar = document.getElementById("comecar");
+
+            var cronometroSeg;
+            var minutoAtual;
+            var segundoAtual;
+            var interval;
+
+            // Aqui colocamos valores dentro do select usando o innerHTML
+            for (let i = 0; i <= 60; i++) {
+                minutos.innerHTML+='<Option value="'+i+'"> '+i+'</option>'; 
+            }
+            for (let i = 1; i <= 60; i++) {
+                segundos.innerHTML+='<Option value="'+i+'"> '+i+'</option>'; 
+            }
+
+            // Adicionamos um escutador de eventos no botao
+            comecar.addEventListener("click", function() {
+                // Colocamos em váriaveis os valores escolhidos pelo usuário
+                minutoAtual = minutos.value;
+                segundoAtual = segundos.value;
+
+                // colocamos dentro do filho a div dispaly os valores recebidos
+                display.childNodes[1].innerHTML = minutoAtual + ":" + segundoAtual;
+
+                // Definimos um intervalo em que isso ocorreria
+                interval = setInterval(() => {
+                    // Diminuimos 1 segundo do segundo atual a cada segundo
+                    segundoAtual--;
+                    if (segundoAtual <= 0) {
+                        // Verificamos se o segundo atual chegou a 0
+                        if (minutoAtual > 0) {
+                            // Se segundoAtual = 0, então verifica se não zerou os minutos
+                            minutoAtual--;
+                            segundoAtual = 59;
+                        }else{ /*Se acabou os minutos e os segundos*/
+                            alert("acabou");
+                            // Pega o áudio e toca ele
+                            document.getElementById("sound").play();
+                            // Limpa a contagem do alarme
+                            clearInterval(interval);
+                        }
+                    }
+                    // Zera o valor do display
+                    display.childNodes[1].innerHTML = minutoAtual + ":" + segundoAtual;
+                }, 1000);
+            });
+        }
+    </script>
+</body>
+</html>
