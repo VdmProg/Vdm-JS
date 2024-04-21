@@ -1,0 +1,53 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    display: flex;
+    max-width: 1020px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.container div{
+    width: 50%;
+    text-align: center;
+}
+
+.container .list{
+    background-color: #ccc;
+}
+
+.list ul{
+    padding: 0 2%;
+}
+
+.list-itens{
+    display: inline-block;
+    width: 98%;
+    margin-top: 10px;
+    list-style: none;
+    border-bottom: 2px solid #000;
+    text-align: left;
+}
+
+.form{
+    width: 100%;
+    text-align: center;
+}
+
+.form input{
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.result-section .container{
+    border: 1px solid #000;
+    border-radius: 20px;
+    margin-top: 40px;
+    padding: 20px 5%;
+    max-width: 800px;
+    width: 70%;
+}
