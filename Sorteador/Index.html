@@ -13,11 +13,23 @@
     <section class="information-section">
         <div class="container">
             <div class="list">
-                <ul id="lista"></ul>
+                <table id="lista">
+                    <thead>
+                        <tr>
+                            <td>Nome</td>
+                            <td>Autor</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody id="lista-itens">
+
+                    </tbody>
+                </table>
             </div>
             <div>
                 <form class="form">
-                    <input type="text" id="item">
+                    <input type="text" id="nome" placeholder="Nome*" required>
+                    <input type="text" id="autor" placeholder="Autor*" required>
                     <input type="submit" value="Adicionar" id="adicionar">
                 </form>
             </div>
@@ -25,7 +37,7 @@
     </section>
     <section class="result-section">
         <div class="container">
-            <div>
+            <div class="btn">
                <input type="submit" value="Sortear" id="sortear"> 
             </div>
             <div>
