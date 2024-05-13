@@ -89,3 +89,13 @@ input[type="submit"]{
     text-align: center;
     margin-top: 4px;
 }
+
+.right{
+    float: right;
+    margin-right: 5px;
+}
+
+.list-itens:hover .right{
+    transition: 1s;
+    color: red;
+}
