@@ -1,5 +1,5 @@
 window.onload = function () {
-    item.focus();
+  document.getElementById('nome').focus();
 }
     
 var itens =[];
@@ -7,26 +7,30 @@ var adicionar = document.getElementById('adicionar');
 
 adicionar.onclick = function(){
     event.preventDefault();
-    var item = document.getElementById('item');
-    itens.push(item.value);
+    var item = {};
+    item.nome = document.getElementById('nome').value;
+    item.autor = document.getElementById('autor').value;
+    itens.push(item);
 
     atualizaLista();
 
-    item.value = " ";
-    item.focus();
+    document.getElementById('nome').value = " ";
+    document.getElementById('autor').value = " ";
+    document.getElementById('nome').focus();
 }
 
 sortear.onclick = function(){
     event.preventDefault();
+    document.getElementById('result').innerHTML = "";
     var sorteio = Math.floor(Math.random() * (itens.length ));
     var resultado = itens[sorteio];
 
-    for (let i = 1; i <= itens.length; i++) {
-        document.getElementById('lista').childNodes[i].style.background = '#ccc';
-    }
+    // for (let i = 1; i <= itens.length; i++) {
+    //     document.getElementById('lista-itens').childNodes[i].style.background = '#ccc';
+    // }
 
-    document.getElementById('result').innerHTML ='<p>'+ resultado + '</p>';
-    document.getElementById('lista').childNodes[sorteio + 1].style.background = '#aaa';
+    document.getElementById('result').innerHTML ='<p>'+ resultado.nome + ' de ' + resultado.autor + '</p>';
+    // document.getElementById('lista-itens').childNodes[sorteio + 1].style.background = '#aaa';
 }
 
 document.getElementById('lista').addEventListener('click', function(event) {
@@ -39,14 +43,14 @@ document.getElementById('lista').addEventListener('click', function(event) {
       itens.splice(index, 1);
   
       // Atualizar a lista na tela
-      var lista = document.getElementById('lista');
+      var lista = document.getElementById('lista-itens');
       atualizaLista();
     }
   });
 
   function atualizaLista() {
-    lista.innerHTML = '';
+    document.getElementById('lista-itens').innerHTML = '';
       for (let i = 0; i < itens.length; i++) {
-        lista.innerHTML += '<li class="list-itens">' + itens[i] + '<i id="excluir" class="fa-solid fa-xmark right"></i>' + '</li>';
+        document.getElementById('lista-itens').innerHTML += '<tr class="list-itens"><td>' + itens[i].nome + '</td><td>'+ itens[i].autor + '</td><td><i id="excluir" class="fa-solid fa-xmark right"></i></td></tr>';
       }
   };
